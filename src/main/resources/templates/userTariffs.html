@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Tariffs</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .charts-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px; /* Расстояние между графиками */
+        }
+        canvas {
+            max-width: 600px; /* Установите максимальную ширину для графиков */
+            max-height: 400px; /* Установите максимальную высоту для графиков */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>User Tariffs</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Second Name</th>
+            <th>Email</th>
+            <th>Tariff Plan ID</th>
+            <th>Tariff Plan Name</th>
+            <th>Cost</th>
+            <th>Speed</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="userTariff : ${userTariffs}">
+            <td th:text="${userTariff.userId}"></td>
+            <td th:text="${userTariff.firstName}"></td>
+            <td th:text="${userTariff.secondName}"></td>
+            <td th:text="${userTariff.email}"></td>
+            <td th:text="${userTariff.tariffPlanId}"></td>
+            <td th:text="${userTariff.tariffPlanName}"></td>
+            <td th:text="${userTariff.cost}"></td>
+            <td th:text="${userTariff.speed}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="charts-container" style="margin-top: 20px;">
+        <canvas id="tariffCostChart"></canvas>
+        <canvas id="tariffSpeedChart"></canvas>
+    </div>
+    <a href="/" class="btn btn-secondary" style="margin-top: 20px;">Back to Home</a>
+</div>
+
+<!-- Script for generating the charts -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctxCost = document.getElementById('tariffCostChart').getContext('2d');
+        const ctxSpeed = document.getElementById('tariffSpeedChart').getContext('2d');
+
+        // Извлекаем данные из таблицы
+        const tableRows = document.querySelectorAll('tbody tr');
+        const label = [];
+        const tariffData = {};
+
+        tableRows.forEach(function(row) {
+            const planName = row.cells[5].textContent; // Извлекаем название тарифного плана
+            const cost = parseFloat(row.cells[6].textContent); // Извлекаем стоимость и парсим в число
+            const speed = parseFloat(row.cells[7].textContent); // Извлекаем скорость и парсим в число
+
+            if (!tariffData[planName]) {
+                tariffData[planName] = { cost: 0, speed: 0 };
+            }
+            tariffData[planName].cost += cost;
+            tariffData[planName].speed += speed;
+        });
+
+        const labels = Object.keys(tariffData);
+        const costData = labels.map(label => tariffData[label].cost);
+        const speedData = labels.map(label => tariffData[label].speed);
+
+        const costChartData = {
+            labels: labels,
+            datasets: [{
+                label: 'Tariff Costs',
+                data: costData,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const speedChartData = {
+            labels: labels,
+            datasets: [{
+                label: 'Tariff Speeds',
+                data: speedData,
+                backgroundColor: 'rgba(192, 75, 75, 0.2)',
+                borderColor: 'rgba(192, 75, 75, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        const tariffCostChart = new Chart(ctxCost, {
+            type: 'bar',
+            data: costChartData,
+            options: options
+        });
+
+        const tariffSpeedChart = new Chart(ctxSpeed, {
+            type: 'bar',
+            data: speedChartData,
+            options: options
+        });
+    });
+</script>
+
+</body>
+</html>

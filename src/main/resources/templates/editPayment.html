@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Payment</title>
+</head>
+<body>
+<h1>Edit Payment</h1>
+<p th:if="${error}" th:text="${error}"></p>
+<form th:action="@{/payments/update/{id}(id=${payment.id})}" method="post" th:object="${payment}">
+
+    <label for="status">Status:</label>
+    <input type="text" id="status" th:field="*{status}" /><br><br>
+
+    <label for="sum">Sum:</label>
+    <input type="number" id="sum" th:field="*{sum}" /><br><br>
+
+    <label for="date">Date:</label>
+    <input type="datetime-local" id="date" th:field="*{date}" /><br><br>
+
+    <label for="paymentMethod">Payment Method:</label><br>
+    <select id="paymentMethod" name="paymentMethod">
+        <option value="">Select a payment method</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Debit Card">Debit Card</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+        <!-- Другие варианты оплаты -->
+    </select><br>
+
+    <!-- Другие варианты оплаты -->
+    </select><br>
+
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tariffes</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="path/to/Chart.js"></script>
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        /* Определение стиля для последней строки таблицы */
+        .last-row {
+            font-weight: bold;
+        }
+        .charts-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px; /* Расстояние между графиками */
+        }
+        canvas {
+            max-width: 600px; /* Установите максимальную ширину для графиков */
+            max-height: 400px; /* Установите максимальную высоту для графиков */
+        }
+    </style>
+    <!-- Подключение Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Доход по тарифному плану</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Tariff Plan Name</th>
+            <th>Total Users</th>
+            <th>Total Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tariff : ${tariffZvit}">
+            <td th:text="${tariff.tariffPlanName}"></td>
+            <td th:text="${tariff.totalUsers}"></td>
+            <td th:text="${tariff.totalRevenue}"></td>
+        </tr>
+        </tbody>
+        <!-- Добавление последней строки с общей суммой выручки -->
+        <tfoot>
+        <tr class="last-row">
+            <td colspan="2">Total Revenue Sum:</td>
+            <td th:text="${tariffZvit[0].totalRevenueSum}"></td>
+        </tr>
+        </tfoot>
+    </table>
+    <!-- Контейнеры для графиков -->
+    <div class="charts-container" style="margin-top: 20px;">
+        <canvas id="revenueChart"></canvas>
+        <canvas id="usersChart"></canvas>
+    </div>
+    <a href="/" class="btn btn-secondary" style="margin-top: 20px;">Back to Home</a>
+</div>
+
+<!-- Подключение Bootstrap JS и jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var tariffZvit = /*[[${tariffZvit}]]*/ '';
+    /*]]>*/
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+        const ctxUsers = document.getElementById('usersChart').getContext('2d');
+
+        const revenueChart = new Chart(ctxRevenue, {
+            type: 'bar',
+            data: {
+                labels: tariffZvit.map(item => item.tariffPlanName),
+                datasets: [{
+                    label: 'Total Revenue',
+                    data: tariffZvit.map(item => item.totalRevenue),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const usersChart = new Chart(ctxUsers, {
+            type: 'bar',
+            data: {
+                labels: tariffZvit.map(item => item.tariffPlanName),
+                datasets: [{
+                    label: 'Total Users',
+                    data: tariffZvit.map(item => item.totalUsers),
+                    backgroundColor: 'rgba(192, 75, 75, 0.2)',
+                    borderColor: 'rgba(192, 75, 75, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

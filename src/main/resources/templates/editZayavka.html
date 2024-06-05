@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Zayavka</title>
+</head>
+<body>
+<h1>Edit Zayavka</h1>
+<form th:action="@{/zayavka/update/{id}(id=${zayavka.id})}" th:object="${zayavka}" method="post">
+
+
+    <label for="status">Status:</label>
+    <input type="text" id="status" th:field="*{status}" /><br><br>
+
+
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>Users</title>
+</head>
+<body>
+<h1>Users</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Date register</th>
+        <th>Address</th>
+        <th>Phone number</th>
+        <th>Login</th>
+        <th>First name</th>
+        <th>Second name</th>
+        <th>Password</th>
+        <th>Id tariff plans</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${#dates.format(user.dateRegister, 'yyyy-MM-dd')}"></td> <!-- форматируем дату -->
+        <td th:text="${user.address}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td th:text="${user.login}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.secondName}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.tariffPlans != null ? user.tariffPlans.id : 'N/A'}"></td> <!-- Проверка на null -->
+        <td>
+            <a th:href="@{/Users/edit/{id}(id=${user.id})}"><button>Edit</button></a>
+            <button th:onclick="'deleteUser(' + ${user.id} + ')'">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Форма для добавления нового пользователя -->
+<h2>Add New User</h2>
+<form action="/Users/add" method="post">
+
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br>
+
+    <label for="dateRegister">Date register:</label><br>
+    <input type="datetime-local" id="dateRegister" name="dateRegister"><br>
+
+    <label for="address">Address:</label><br>
+    <input type="text" id="address" name="address"><br>
+
+    <label for="phoneNumber">Phone number:</label><br>
+    <input type="text" id="phoneNumber" name="phoneNumber"><br>
+
+    <label for="login">Login:</label><br>
+    <input type="text" id="login" name="login"><br>
+
+    <label for="firstName">First name:</label><br>
+    <input type="text" id="firstName" name="firstName"><br>
+
+    <label for="secondName">Second name:</label><br>
+    <input type="text" id="secondName" name="secondName"><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br>
+
+    <input type="submit" value="Add User">
+</form>
+
+<script>
+    function deleteUser(userId) {
+        fetch(`/Users/delete/${userId}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                console.error('Failed to delete user');
+            }
+        }).catch(error => {
+            console.error('Error deleting user:', error);
+        });
+    }
+</script>
+</body>
+</html>

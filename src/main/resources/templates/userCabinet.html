@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Cabinet</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container-custom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .profile, .tariff {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .btn-custom {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center my-4">User Cabinet</h1>
+
+    <!-- Блок "Профиль" и информация о тарифном плане -->
+    <div class="container-custom">
+        <div class="profile">
+            <h2 class="text-primary">Профиль</h2>
+            <p>Welcome, <span th:text="${user.firstName}">User</span>!</p>
+            <p>Email: <span th:text="${user.email}">Email not provided</span></p>
+            <p>Phone Number: <span th:text="${user.phoneNumber}">Phone number not provided</span></p>
+            <p>Address: <span th:text="${user.address}">Address not provided</span></p>
+            <!-- Ссылка для редактирования профиля -->
+            <a th:href="@{'/editProfile/' + ${user.id}}" class="btn btn-primary btn-custom">Edit Profile</a>
+        </div>
+
+        <div class="tariff">
+            <h2 class="text-primary">Your Tariff</h2>
+            <p>Your tariff: <span th:text="${user.tariffPlans != null ? user.tariffPlans.name : 'None'}"></span></p>
+            <p>Internet connection status:
+                <span th:if="${user.tariffPlans != null}" class="text-success">Connected</span>
+                <span th:if="${user.tariffPlans == null}" class="text-danger">Not Connected</span>
+            </p>
+            <!-- Сообщение о необходимости покупки тарифного плана после подключения интернета -->
+
+            <!-- Ссылки для оформления заказа и подключения интернета -->
+            <a th:href="@{/submitOrder/{userId}(userId=${user.id})}" class="btn btn-success btn-custom">Оформить заказ</a>
+            <a th:href="@{/connectInternet/{userId}(userId=${user.id})}" class="btn btn-warning btn-custom" onclick="connectInternet()">Подключить интернет</a>
+        </div>
+    </div>
+
+    <!-- Ссылка для возврата на главную страницу -->
+    <div class="text-center my-4">
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+
+<!-- Подключение Bootstrap JS и jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function connectInternet() {
+        window.location.href = 'http://127.0.0.1:8080/connectInternet/17';
+    }
+</script>
+</body>
+</html>

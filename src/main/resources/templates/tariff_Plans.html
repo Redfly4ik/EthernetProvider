@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <meta charset="UTF-8">
+    <title>Tariff Plans</title>
+</head>
+<body>
+<h1>Tariff Plans</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Speed</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tariffPlans : ${tariffPlans}">
+        <td th:text="${tariffPlans.id}"></td>
+        <td th:text="${tariffPlans.name}"></td>
+        <td th:text="${tariffPlans.cost}"></td>
+        <td th:text="${tariffPlans.speed}"></td>
+        <td>
+            <a th:href="@{/tariff_Plans/edit/{id}(id=${tariffPlans.id})}"><button>Edit</button></a>
+            <button th:onclick="'deleteTariffPlans(' + ${tariffPlans.id} + ')'">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Add New Tariff Plan</h2>
+<form th:action="@{/tariff_Plans/add}" method="post">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="cost">Cost:</label>
+    <input type="number" id="cost" name="cost" step="0.01"><br><br>
+    <label for="speed">Speed:</label>
+    <input type="number" id="speed" name="speed"><br><br>
+    <button type="submit">Add</button>
+</form>
+
+<script>
+    function deleteTariffPlans(tariffPlansId) {
+        fetch(`/Tariff_Plans/delete/${tariffPlansId}`, {
+            method: 'DELETE'
+        }).then(response => {
+            if (response.ok) {
+                return response.json(); // Parse response JSON
+            } else {
+                console.error('Failed to delete tariff plan');
+            }
+        }).then(data => {
+            window.location.reload(); // Reload page after successful deletion
+        }).catch(error => {
+            console.error('Error deleting tariff plan:', error);
+        });
+    }
+</script>
+</body>
+</html>

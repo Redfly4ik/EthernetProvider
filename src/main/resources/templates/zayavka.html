@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zayavka List</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+<h1>Zayavka List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Submission Date</th>
+        <th>Status</th>
+
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="zayavka : ${zayavkas}">
+        <td th:text="${zayavka.id}"></td>
+        <td th:text="${zayavka.user.firstName + ' ' + zayavka.user.secondName}"></td>
+        <td th:text="${#dates.format(zayavka.submissionDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${zayavka.status}"></td>
+
+        <td>
+            <a th:href="@{/zayavka/edit/{id}(id=${zayavka.id})}"><button>Edit</button></a>
+            <button th:onclick="'deleteZayavka(' + ${zayavka.id} + ')'">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/zayavka/new"><button>Add New Zayavka</button></a>
+<script>
+    function deleteZayavka(zayavkaId) {
+        fetch(`/zayavka/delete/${zayavkaId}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                console.error('Failed to delete zayavka');
+            }
+        }).catch(error => {
+            console.error('Error deleting zayavka:', error);
+        });
+    }
+</script>
+</body>
+</html>

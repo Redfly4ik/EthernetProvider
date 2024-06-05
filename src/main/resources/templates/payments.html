@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>Payments</title>
+    <style>
+        #paymentForm, #filterForm {
+            display: none;
+            margin-top: 10px;
+        }
+        h2 span {
+            cursor: pointer;
+        }
+        .form-container {
+            display: flex;
+        }
+        .form-group {
+            margin-right: 20px; /* Adjust spacing between forms */
+        }
+    </style>
+</head>
+<body>
+<h1 onclick="navigateToPayments()">Payments</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>ID User</th>
+        <th>Date</th>
+        <th>Sum</th>
+        <th>Payment Method</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="payment : ${payments}">
+        <td th:text="${payment.id}"></td>
+        <td th:text="${payment.status}"></td>
+        <td th:text="${payment.getUserId()}"></td>
+        <td th:text="${#dates.format(payment.date, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${payment.sum}"></td>
+        <td th:text="${payment.paymentMethod}"></td>
+        <td>
+            <a th:href="@{/payments/edit/{id}(id=${payment.id})}"><button>Edit</button></a>
+            <button th:onclick="'deletePayment(' + ${payment.id} + ')'">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="form-container">
+    <div class="form-group">
+        <h2><span onclick="toggleForm('paymentForm')">Add New Payment</span></h2>
+        <div id="paymentForm">
+            <form action="/payments/add" method="post">
+
+
+                <label for="status">Status:</label><br>
+                <input type="text" id="status" name="status"><br>
+
+                <label for="date">Date:</label><br>
+                <input type="datetime-local" id="date" name="date"><br>
+
+                <label for="sum">Sum:</label><br>
+                <input type="number" id="sum" name="sum" step="0.01"><br>
+                <label for="paymentMethod">Payment Method:</label><br>
+
+                <label for="paymentMethod">Payment Method:</label><br>
+                <select id="paymentMethod" name="paymentMethod">
+                    <option value="">Select a payment method</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <!-- Другие варианты оплаты -->
+                </select><br>
+
+
+                <label for="userId">User:</label><br>
+                <select id="userId" name="userId">
+                    <option value="">Select a user</option>
+                    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.email}"></option>
+                </select><br>
+
+                <input type="submit" value="Add Payment">
+            </form>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h2><span onclick="toggleForm('filterForm')">Filter Payments</span></h2>
+        <div id="filterForm">
+            <form action="/payments/filter" method="get">
+                <label for="statusFilter">Status:</label><br>
+                <input type="text" id="statusFilter" name="statusFilter"><br>
+                <input type="submit" value="Filter Payments">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function navigateToPayments() {
+        window.location.href = "/payments";
+    }
+    function toggleForm(formId) {
+        const form = document.getElementById(formId);
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+    function editPayment(paymentId) {
+        console.log('Editing payment with ID:', paymentId);
+    }
+
+    function deletePayment(paymentId) {
+        fetch(`/payments/delete/${paymentId}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                console.error('Failed to delete payment');
+            }
+        }).catch(error => {
+            console.error('Error deleting payment:', error);
+        });
+    }
+
+    // Hide the forms and headings by default
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('paymentForm').style.display = 'none';
+        document.getElementById('filterForm').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

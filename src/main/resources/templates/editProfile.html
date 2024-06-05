@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <!-- Подключение стилей для оформления -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit Your Profile</h1>
+
+    <form th:action="@{/updateProfile/{id}(id=${user.id})}" method="post">
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" th:value="${user.firstName}"><br>
+
+        <label for="secondName">Second Name:</label>
+        <input type="text" id="secondName" name="secondName" th:value="${user.secondName}"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${user.email}"><br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" th:value="${user.phoneNumber}"><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" th:value="${user.address}"><br>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <!-- Ссылка для возврата на страницу кабинета -->
+    <p><a href="/userCabinet">Back to User Cabinet</a></p>
+</div>
+</body>
+</html>

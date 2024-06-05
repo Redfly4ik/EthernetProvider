@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container-custom {
+            margin-top: 50px;
+        }
+
+        .nav-link {
+            font-size: 1.2em;
+        }
+
+        .btn-custom {
+            margin: 5px;
+        }
+
+        .nav-item + .nav-item {
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container text-center">
+    <h1 class="my-4">Home Page</h1>
+    <nav>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/payments" target="_blank">Платежи</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/Users" target="_blank">Пользователи</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/Tariff_Plans" target="_blank">Тарифные планы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/zayavka" target="_blank">Заявки</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/userTariffs" target="_blank">Тарифы клиентов</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/Tariffes" target="_blank">Кол-во клиентов по тарифам</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="mt-4">
+        <button onclick="location.href='http://127.0.0.1:8080/register'" type="button" class="btn btn-success btn-custom">Зарегистрироваться</button>
+        <button onclick="location.href='http://127.0.0.1:8080/login'" type="button" class="btn btn-primary btn-custom">Войти</button>
+    </div>
+</div>
+<!-- Подключение Bootstrap JS и jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
