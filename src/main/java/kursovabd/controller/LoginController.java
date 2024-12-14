@@ -23,11 +23,23 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute Users user, Model model) {
+        // Найти пользователя по логину
         Users foundUser = userRepository.findByLogin(user.getLogin());
-        if (foundUser != null && foundUser.getPassword().equals(user.getPassword())) {
-            return "redirect:/Users/" + foundUser.getId() + "/cabinet"; // Correctly formatted URL
+
+        // Проверка на null
+        if (foundUser != null) {
+            // Проверка для администратора
+            if ("admin".equals(user.getLogin()) && foundUser.getPassword().equals(user.getPassword())) {
+                return "redirect:/admin";
+            }
+            // Проверка для других пользователей
+            if (foundUser.getPassword().equals(user.getPassword())) {
+                return "redirect:/Users/" + foundUser.getId() + "/cabinet";
+            }
         }
-        model.addAttribute("user", user);  // Add the user object back to the model
+
+        // Если данные не прошли проверку
+        model.addAttribute("user", user);
         model.addAttribute("error", "Invalid email or password");
         return "login";
     }

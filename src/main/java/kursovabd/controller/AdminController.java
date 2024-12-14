@@ -1,6 +1,7 @@
 package kursovabd.controller;
 import kursovabd.Repository.UserRepository;
 import kursovabd.model.UserTariffInfo;
+import kursovabd.projection.TariffPlanZvit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,5 +20,10 @@ public class AdminController {
         model.addAttribute("userTariffs", userTariffs);
 
         return "userTariffs";
+    }
+    @GetMapping("/admin")
+    public String getUserTariffes(Model model) {
+
+        return "admin";
     }
 }

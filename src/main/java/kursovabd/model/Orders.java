@@ -5,22 +5,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "zayavka")
-public class Zayavka {
+@Table(name = "orders")
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_zayavki")
+    @Column(name = "id_orders")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "id_users", nullable = false)
     private Users user;
 
-    @Column(name = "Date_podachi_zayavki", nullable = false, columnDefinition = "DATETIME")
+    @Column(name = "date", nullable = false, columnDefinition = "DATETIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date submissionDate;
 
-    @Column(name = "status_zayavki", nullable = false)
+    @Column(name = "status", nullable = false)
     private String status;
 
     @ManyToOne

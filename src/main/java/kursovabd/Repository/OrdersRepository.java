@@ -1,6 +1,6 @@
 package kursovabd.Repository;
 
-import kursovabd.model.Zayavka;
+import kursovabd.model.Orders;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,21 +9,21 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface ZayavkaRepository extends CrudRepository<Zayavka, Long> {
+public interface OrdersRepository extends CrudRepository<Orders, Long> {
 
     // Метод для поиска заявок по пользователю
-    List<Zayavka> findByUser_Id(Long userId);
+    List<Orders> findByUser_Id(Long userId);
 
     // Метод для поиска заявок по статусу
-    List<Zayavka> findByStatus(Integer status);
+    List<Orders> findByStatus(Integer status);
 
     // Метод для поиска заявок по тарифному плану
-    List<Zayavka> findByTariffPlans_Id(Long tariffPlanId);
+    List<Orders> findByTariffPlans_Id(Long tariffPlanId);
 
     // Метод для поиска заявок по дате подачи
-    List<Zayavka> findBySubmissionDateBetween(Date startDate, Date endDate);
+    List<Orders> findBySubmissionDateBetween(Date startDate, Date endDate);
 
     // Пользовательский запрос для поиска заявок по статусу и тарифному плану
-    @Query("SELECT z FROM Zayavka z WHERE z.status = :status AND z.tariffPlans.id = :tariffPlanId")
-    List<Zayavka> findByStatusAndTariffPlan(@Param("status") Integer status, @Param("tariffPlanId") Long tariffPlanId);
+    @Query("SELECT z FROM Orders z WHERE z.status = :status AND z.tariffPlans.id = :tariffPlanId")
+    List<Orders> findByStatusAndTariffPlan(@Param("status") Integer status, @Param("tariffPlanId") Long tariffPlanId);
 }

@@ -2,9 +2,9 @@ package kursovabd.controller;
 
 import kursovabd.Repository.TariffPlanRepository;
 import kursovabd.Repository.UserRepository;
-import kursovabd.Repository.ZayavkaRepository;
+import kursovabd.Repository.OrdersRepository;
 import kursovabd.model.Users;
-import kursovabd.model.Zayavka;
+import kursovabd.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class ConnectInternetController {
     private TariffPlanRepository tariffPlanRepository;
 
     @Autowired
-    private ZayavkaRepository zayavkaRepository;
+    private OrdersRepository zayavkaRepository;
 
     @Autowired
     private UserRepository UserRepository;
@@ -44,7 +44,7 @@ public class ConnectInternetController {
     public String submitConnectionRequest(@PathVariable("userId") Long userId) {
         Users user = userRepository.findById(userId).orElse(null);
         if (user != null) {
-            Zayavka zayavka = new Zayavka();
+            Orders zayavka = new Orders();
             zayavka.setUser(user);
             zayavka.setSubmissionDate(new Date());
             zayavka.setStatus("Successful");

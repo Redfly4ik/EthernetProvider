@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders List</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+<h1>Orders List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Submission Date</th>
+        <th>Status</th>
+
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="orders : ${orders}">
+        <td th:text="${orders.id}"></td>
+        <td th:text="${orders.user.firstName + ' ' + orders.user.secondName}"></td>
+        <td th:text="${#dates.format(orders.submissionDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${orders.status}"></td>
+
+        <td>
+            <a th:href="@{/orders/edit/{id}(id=${orders.id})}"><button>Edit</button></a>
+            <button th:onclick="'deleteOrders(' + ${orders.id} + ')'">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function deleteOrders(ordersId) {
+        fetch(`/orders/delete/${ordersId}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                console.error('Failed to delete order');
+            }
+        }).catch(error => {
+            console.error('Error deleting order:', error);
+        });
+    }
+</script>
+</body>
+</html>

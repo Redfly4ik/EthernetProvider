@@ -32,6 +32,6 @@ public class RegController {
         }
 
         userRepository.save(user);
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
