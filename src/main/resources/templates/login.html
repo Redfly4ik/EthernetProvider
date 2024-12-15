@@ -74,19 +74,19 @@
 </head>
 <body>
 <div class="container">
-    <h1>Login</h1>
+    <h1>Вхід</h1>
     <form method="post" th:action="@{/login}" th:object="${user}">
-        <label for="login">Login:</label>
+        <label for="login">Логін:</label>
         <input type="text" id="login" name="login" th:field="*{login}" required><br><br>
-        <label for="password">Password:</label>
+        <label for="password">Пароль:</label>
         <input type="password" id="password" name="password" th:field="*{password}" required><br><br>
-        <input type="submit" value="Login">
+        <input type="submit" value="Вхід">
     </form>
 
     <!-- Display error message if present -->
     <p th:if="${error}" class="error" th:text="${error}"></p>
 
-    <p><a href="/">Back to Home</a></p>
+    <p><a href="#">Головна сторінка</a></p>
 </div>
 </body>
 </html>

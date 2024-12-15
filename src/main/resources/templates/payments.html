@@ -18,20 +18,61 @@
         .form-group {
             margin-right: 20px; /* Adjust spacing between forms */
         }
+        .nav-link {
+            font-size: 1.2em;
+        }
+
+        .btn-custom {
+            margin: 5px;
+        }
+
+        .nav-item + .nav-item {
+            margin-left: 15px;
+        }
     </style>
 </head>
 <body>
-<h1 onclick="navigateToPayments()">Payments</h1>
+<!--<div class="container text-center">-->
+  
+<!--    <nav>-->
+<!--        <ul class="nav justify-content-center">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/payments" target="_blank">Платежи</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/Users" target="_blank">Пользователи</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/Tariff_Plans" target="_blank">Тарифные планы</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/orders" target="_blank">Заявки</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/userTariffs" target="_blank">Тарифы клиентов</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/Tariffes" target="_blank">Кол-во клиентов по тарифам</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
+
+
+
+
+
+<h1 onclick="navigateToPayments()">Платежі</h1>
 <table>
     <thead>
     <tr>
         <th>ID</th>
-        <th>Status</th>
-        <th>ID User</th>
-        <th>Date</th>
-        <th>Sum</th>
-        <th>Payment Method</th>
-        <th>Actions</th>
+        <th>Статус</th>
+        <th>ID користувача</th>
+        <th>Дата</th>
+        <th>Сума</th>
+        <th>Спосіб оплати</th>
+        <th>Дії</th>
     </tr>
     </thead>
     <tbody>
@@ -43,8 +84,8 @@
         <td th:text="${payment.sum}"></td>
         <td th:text="${payment.paymentMethod}"></td>
         <td>
-            <a th:href="@{/payments/edit/{id}(id=${payment.id})}"><button>Edit</button></a>
-            <button th:onclick="'deletePayment(' + ${payment.id} + ')'">Delete</button>
+            <a th:href="@{/payments/edit/{id}(id=${payment.id})}"><button>Редагувати</button></a>
+            <button th:onclick="'deletePayment(' + ${payment.id} + ')'">Видалити</button>
         </td>
     </tr>
     </tbody>
@@ -52,24 +93,24 @@
 
 <div class="form-container">
     <div class="form-group">
-        <h2><span onclick="toggleForm('paymentForm')">Add New Payment</span></h2>
+        <h2><span onclick="toggleForm('paymentForm')">Додати новий платіж</span></h2>
         <div id="paymentForm">
             <form action="/payments/add" method="post">
 
 
-                <label for="status">Status:</label><br>
+                <label for="status">Статус:</label><br>
                 <input type="text" id="status" name="status"><br>
 
-                <label for="date">Date:</label><br>
+                <label for="date">Дата:</label><br>
                 <input type="datetime-local" id="date" name="date"><br>
 
-                <label for="sum">Sum:</label><br>
+                <label for="sum">Сума:</label><br>
                 <input type="number" id="sum" name="sum" step="0.01"><br>
-                <label for="paymentMethod">Payment Method:</label><br>
+                <label for="paymentMethod">Спосіб оплати:</label><br>
 
-                <label for="paymentMethod">Payment Method:</label><br>
+                <label for="paymentMethod">Спосіб оплати:</label><br>
                 <select id="paymentMethod" name="paymentMethod">
-                    <option value="">Select a payment method</option>
+                    <option value="">Виберіть спосіб оплати</option>
                     <option value="Credit Card">Credit Card</option>
                     <option value="Debit Card">Debit Card</option>
                     <option value="Bank Transfer">Bank Transfer</option>
@@ -77,22 +118,22 @@
                 </select><br>
 
 
-                <label for="userId">User:</label><br>
+                <label for="userId">Користувач:</label><br>
                 <select id="userId" name="userId">
-                    <option value="">Select a user</option>
+                    <option value="">Вибір користувача</option>
                     <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.email}"></option>
                 </select><br>
 
-                <input type="submit" value="Add Payment">
+                <input type="submit" value="Додати платіж">
             </form>
         </div>
     </div>
 
     <div class="form-group">
-        <h2><span onclick="toggleForm('filterForm')">Filter Payments</span></h2>
+        <h2><span onclick="toggleForm('filterForm')">Фільтр платежей</span></h2>
         <div id="filterForm">
             <form action="/payments/filter" method="get">
-                <label for="statusFilter">Status:</label><br>
+                <label for="statusFilter">Статус:</label><br>
                 <input type="text" id="statusFilter" name="statusFilter"><br>
                 <input type="submit" value="Filter Payments">
             </form>

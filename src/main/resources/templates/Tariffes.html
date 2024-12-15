@@ -33,13 +33,13 @@
 <body>
 
 <div class="container">
-    <h1>Доход по тарифному плану</h1>
+    <h1>Дохід по тарифному плану</h1>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Tariff Plan Name</th>
-            <th>Total Users</th>
-            <th>Total Revenue</th>
+            <th>Назва тарифного плану</th>
+            <th>Кіль-сть користувачів</th>
+            <th>Загальний дохід</th>
         </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@
         <!-- Добавление последней строки с общей суммой выручки -->
         <tfoot>
         <tr class="last-row">
-            <td colspan="2">Total Revenue Sum:</td>
+            <td colspan="2">Загальний дохід:</td>
             <td th:text="${tariffZvit[0].totalRevenueSum}"></td>
         </tr>
         </tfoot>
@@ -62,7 +62,7 @@
         <canvas id="revenueChart"></canvas>
         <canvas id="usersChart"></canvas>
     </div>
-    <a href="/" class="btn btn-secondary" style="margin-top: 20px;">Back to Home</a>
+    <a href="/" class="btn btn-secondary" style="margin-top: 20px;">На головну</a>
 </div>
 
 <!-- Подключение Bootstrap JS и jQuery -->

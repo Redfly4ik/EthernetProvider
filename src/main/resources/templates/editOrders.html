@@ -5,16 +5,16 @@
     <title>Edit Zayavka</title>
 </head>
 <body>
-<h1>Edit Zayavka</h1>
-<form th:action="@{/zayavka/update/{id}(id=${zayavka.id})}" th:object="${zayavka}" method="post">
+<h1>Редагування заявок</h1>
+<form th:action="@{/orders/update/{id}(id=${orders.id})}" th:object="${orders}" method="post">
 
 
-    <label for="status">Status:</label>
+    <label for="status">Статус:</label>
     <input type="text" id="status" th:field="*{status}" /><br><br>
 
 
 
-    <button type="submit">Save</button>
+    <button type="submit">Зберегти</button>
 </form>
 </body>
 </html>

@@ -6,16 +6,16 @@
     <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
-<h1>Orders List</h1>
+<h1>Заявки</h1>
 <table>
     <thead>
     <tr>
         <th>ID</th>
-        <th>User</th>
-        <th>Submission Date</th>
-        <th>Status</th>
+        <th>Користувачі</th>
+        <th>Дата</th>
+        <th>Статус</th>
 
-        <th>Actions</th>
+        <th>Дії</th>
     </tr>
     </thead>
     <tbody>
@@ -26,8 +26,8 @@
         <td th:text="${orders.status}"></td>
 
         <td>
-            <a th:href="@{/orders/edit/{id}(id=${orders.id})}"><button>Edit</button></a>
-            <button th:onclick="'deleteOrders(' + ${orders.id} + ')'">Delete</button>
+            <a th:href="@{/orders/edit/{id}(id=${orders.id})}"><button>Редагувати</button></a>
+            <button th:onclick="'deleteOrders(' + ${orders.id} + ')'">Видалити</button>
         </td>
     </tr>
     </tbody>

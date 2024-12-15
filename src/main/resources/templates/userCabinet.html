@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Cabinet</title>
+    <title>Особистий кабінет</title>
     <!-- Подключение Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -27,38 +27,38 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="text-center my-4">User Cabinet</h1>
+    <h1 class="text-center my-4">Особистий кабінет</h1>
 
     <!-- Блок "Профиль" и информация о тарифном плане -->
     <div class="container-custom">
         <div class="profile">
-            <h2 class="text-primary">Профиль</h2>
-            <p>Welcome, <span th:text="${user.firstName}">User</span>!</p>
-            <p>Email: <span th:text="${user.email}">Email not provided</span></p>
-            <p>Phone Number: <span th:text="${user.phoneNumber}">Phone number not provided</span></p>
-            <p>Address: <span th:text="${user.address}">Address not provided</span></p>
+            <h2 class="text-primary">Профіль</h2>
+            <p>Ласкаво просимо, <span th:text="${user.firstName}">Ім'я</span>!</p>
+            <p>Пошта: <span th:text="${user.email}">Email not provided</span></p>
+            <p>Номер телефону: <span th:text="${user.phoneNumber}">Phone number not provided</span></p>
+            <p>Адреса: <span th:text="${user.address}">Address not provided</span></p>
             <!-- Ссылка для редактирования профиля -->
-            <a th:href="@{'/editProfile/' + ${user.id}}" class="btn btn-primary btn-custom">Edit Profile</a>
+            <a th:href="@{'/editProfile/' + ${user.id}}" class="btn btn-primary btn-custom">Редагування профілю</a>
         </div>
 
         <div class="tariff">
-            <h2 class="text-primary">Your Tariff</h2>
-            <p>Your tariff: <span th:text="${user.tariffPlans != null ? user.tariffPlans.name : 'None'}"></span></p>
-            <p>Internet connection status:
-                <span th:if="${user.tariffPlans != null}" class="text-success">Connected</span>
-                <span th:if="${user.tariffPlans == null}" class="text-danger">Not Connected</span>
+            <h2 class="text-primary">Тарифний план</h2>
+            <p>Ваш тарифний план: <span th:text="${user.tariffPlans != null ? user.tariffPlans.name : 'None'}"></span></p>
+            <p>Статус інтернет підключення:
+                <span th:if="${user.tariffPlans != null}" class="text-success">Підключен</span>
+                <span th:if="${user.tariffPlans == null}" class="text-danger">Не підключен</span>
             </p>
             <!-- Сообщение о необходимости покупки тарифного плана после подключения интернета -->
 
             <!-- Ссылки для оформления заказа и подключения интернета -->
-            <a th:href="@{/submitOrder/{userId}(userId=${user.id})}" class="btn btn-success btn-custom">Оформить заказ</a>
-            <a th:href="@{/connectInternet/{userId}(userId=${user.id})}" class="btn btn-warning btn-custom" onclick="connectInternet()">Подключить интернет</a>
+            <a th:href="@{/submitOrder/{userId}(userId=${user.id})}" class="btn btn-success btn-custom">Оформити заказ</a>
+            <a th:href="@{/connectInternet/{userId}(userId=${user.id})}" class="btn btn-warning btn-custom" onclick="connectInternet()">Підключити інтернет</a>
         </div>
     </div>
 
     <!-- Ссылка для возврата на главную страницу -->
     <div class="text-center my-4">
-        <a href="/" class="btn btn-secondary">Back to Home</a>
+        <a href="/" class="btn btn-secondary">Головна сторінка</a>
     </div>
 </div>
 

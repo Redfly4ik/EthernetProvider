@@ -2,49 +2,155 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Provider</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            color: #333;
         }
 
-        .container-custom {
-            margin-top: 50px;
+        .navbar {
+            background-color: #0056b3;
         }
 
-        .nav-link {
+        .navbar-brand {
+            font-size: 1.8em;
+            color: #ffffff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ffffff;
             font-size: 1.2em;
         }
 
-        .btn-custom {
-            margin: 5px;
+        .hero {
+            text-align: center;
+            padding: 100px 15px;
+            background: url('templates/img.jpeg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            position: relative;
         }
 
-        .nav-item + .nav-item {
-            margin-left: 15px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* затемнение (0.5 - уровень прозрачности) */
+            z-index: 2;
+        }
+
+        .hero h1, .hero p {
+            position: relative;
+            z-index: 2; /* убедитесь, что текст остается поверх затемнения */
+        }
+
+
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin: 100px 0;
+        }
+
+        /* Добавление z-index для кнопок */
+        .btn-custom {
+            font-size: 1.2em;
+            margin: 10px;
+            padding: 10px 30px;
+            z-index: 3; /* Убедитесь, что кнопки находятся выше других элементов */
+            position: relative;
+        }
+
+        .features {
+            padding: 100px 15px;
+        }
+
+        .feature {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .feature i {
+            font-size: 3em;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<div class="container text-center">
-    <h1 class="my-4">Home Page</h1>
-    <nav>
-        <ul class="nav justify-content-center">
 
-            <li class="nav-item">
-                <a class="nav-link btn btn-outline-primary" href="http://127.0.0.1:8080/form" target="_blank">Зворотній звязок</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="mt-4">
-        <button onclick="location.href='http://127.0.0.1:8080/register'" type="button" class="btn btn-success btn-custom">Зарегистрироваться</button>
-        <button onclick="location.href='http://127.0.0.1:8080/login'" type="button" class="btn btn-primary btn-custom">Войти</button>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">SkyNet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Послуги</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Про нас</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="form">Зв'яжіться з нами</a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+
+<div class="hero">
+    <h1>Швидкий і надійний Інтернет</h1>
+    <p>Залишайтеся на зв’язку завдяки високошвидкісному Інтернету для дому та роботи</p>
+    <button onclick="location.href='http://127.0.0.1:8080/register'" class="btn btn-success btn-custom">Зареєструватися</button>
+    <button onclick="location.href='http://127.0.0.1:8080/login'" class="btn btn-primary btn-custom">Увійти</button>
+</div>
+
+<div class="container features">
+    <div class="row">
+        <div class="col-md-4 feature">
+            <i class="fas fa-wifi"></i>
+            <h3>Швидкісний Інтернет</h3>
+            <p>Насолоджуйтеся безперебійним Інтернетом на блискавичній швидкості.</p>
+        </div>
+        <div class="col-md-4 feature">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Безпечне з'єднання</h3>
+            <p>Ми надаємо пріоритет вашій онлайн-безпеці за допомогою передових протоколів.</p>
+        </div>
+        <div class="col-md-4 feature">
+            <i class="fas fa-headset"></i>
+            <h3>Підтримка 24/7</h3>
+            <p>Наша команда готова допомогти вам у будь-який час дня чи ночі.</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 SkyNet. Всі права захищено.</p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

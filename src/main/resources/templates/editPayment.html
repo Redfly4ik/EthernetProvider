@@ -5,22 +5,22 @@
     <title>Edit Payment</title>
 </head>
 <body>
-<h1>Edit Payment</h1>
+<h1>Редагування платежів</h1>
 <p th:if="${error}" th:text="${error}"></p>
 <form th:action="@{/payments/update/{id}(id=${payment.id})}" method="post" th:object="${payment}">
 
-    <label for="status">Status:</label>
+    <label for="status">Статус:</label>
     <input type="text" id="status" th:field="*{status}" /><br><br>
 
-    <label for="sum">Sum:</label>
+    <label for="sum">Сумма:</label>
     <input type="number" id="sum" th:field="*{sum}" /><br><br>
 
-    <label for="date">Date:</label>
+    <label for="date">Дата:</label>
     <input type="datetime-local" id="date" th:field="*{date}" /><br><br>
 
-    <label for="paymentMethod">Payment Method:</label><br>
+    <label for="paymentMethod">Спосіб оплати:</label><br>
     <select id="paymentMethod" name="paymentMethod">
-        <option value="">Select a payment method</option>
+        <option value="">Виберіть спосіб оплати</option>
         <option value="Credit Card">Credit Card</option>
         <option value="Debit Card">Debit Card</option>
         <option value="Bank Transfer">Bank Transfer</option>
@@ -31,7 +31,7 @@
     </select><br>
 
 
-    <button type="submit">Save</button>
+    <button type="submit">Зберегти</button>
 </form>
 </body>
 </html>

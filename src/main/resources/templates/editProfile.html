@@ -73,30 +73,30 @@
 </head>
 <body>
 <div class="container">
-    <h1>Edit Your Profile</h1>
+    <h1>Редагування профілю</h1>
 
     <form th:action="@{/updateProfile/{id}(id=${user.id})}" method="post">
 
-        <label for="firstName">First Name:</label>
+        <label for="firstName">Ім'я:</label>
         <input type="text" id="firstName" name="firstName" th:value="${user.firstName}"><br>
 
-        <label for="secondName">Second Name:</label>
+        <label for="secondName">Прізвище:</label>
         <input type="text" id="secondName" name="secondName" th:value="${user.secondName}"><br>
 
-        <label for="email">Email:</label>
+        <label for="email">Пошта:</label>
         <input type="email" id="email" name="email" th:value="${user.email}"><br>
 
-        <label for="phoneNumber">Phone Number:</label>
+        <label for="phoneNumber">Номер телефону:</label>
         <input type="tel" id="phoneNumber" name="phoneNumber" th:value="${user.phoneNumber}"><br>
 
-        <label for="address">Address:</label>
+        <label for="address">Адрес:</label>
         <input type="text" id="address" name="address" th:value="${user.address}"><br>
 
-        <button type="submit">Save Changes</button>
+        <button type="submit">Зберегти</button>
     </form>
 
     <!-- Ссылка для возврата на страницу кабинета -->
-    <p><a href="/userCabinet">Back to User Cabinet</a></p>
+    <p><a href="/userCabinet">Повернутися до кабінету користувача</a></p>
 </div>
 </body>
 </html>

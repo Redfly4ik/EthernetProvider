@@ -43,26 +43,26 @@
   </style>
 </head>
 <body>
-<h1 class="text-center">Connect to Internet</h1>
+<h1 class="text-center">Підключення інтернету</h1>
 <form th:action="@{/connectInternet/{userId}(userId=${user.id})}" method="post">
 
   <input type="hidden" id="userId" name="userId" th:value="${user.id}">
 
   <div class="form-group">
-    <label for="address">Address:</label>
+    <label for="address">Адреса:</label>
     <span id="address" class="form-control" th:text="${user.address}"></span>
   </div>
 
   <div class="form-group">
-    <label for="phoneNumber">Phone Number:</label>
+    <label for="phoneNumber">Номер телефону:</label>
     <span id="phoneNumber" class="form-control" th:text="${user.phoneNumber}"></span>
   </div>
 
   <div class="form-group">
-    <p>Your tariff: <span class="text-primary" th:text="${user.tariffPlans != null ? user.tariffPlans.name : 'None'}"></span></p>
+    <p>Ваш тарифний план: <span class="text-primary" th:text="${user.tariffPlans != null ? user.tariffPlans.name : 'None'}"></span></p>
   </div>
 
-  <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+  <button type="submit" class="btn btn-primary btn-block">Підключити</button>
 </form>
 </body>
 </html>

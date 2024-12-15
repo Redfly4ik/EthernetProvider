@@ -5,52 +5,52 @@
     <title>Edit User</title>
 </head>
 <body>
-<h1>Edit User</h1>
+<h1>Редагування профілю</h1>
 <form action="#" th:action="@{/Users/update/{id}(id=${user.id})}" th:object="${user}" method="post">
 
     <input type="hidden" th:field="*{id}" />
     <div>
-        <label for="email">Email:</label>
+        <label for="email">Пошта:</label>
         <input type="text" id="email" th:field="*{email}" />
     </div>
 
 
     <div>
-        <label for="dateRegister">Date Register:</label>
+        <label for="dateRegister">Дата реєстрації:</label>
         <input type="datetime-local" id="dateRegister" th:field="*{dateRegister}" />
     </div>
 
 
     <div>
-        <label for="address">Address:</label>
+        <label for="address">Адрес:</label>
         <input type="text" id="address" th:field="*{address}" />
     </div>
     <div>
-        <label for="phoneNumber">Phone Number:</label>
+        <label for="phoneNumber">Номер телефону:</label>
         <input type="text" id="phoneNumber" th:field="*{phoneNumber}" />
     </div>
     <div>
-        <label for="login">Login:</label>
+        <label for="login">Логін:</label>
         <input type="text" id="login" th:field="*{login}" />
     </div>
     <div>
-        <label for="firstName">First Name:</label>
+        <label for="firstName">Ім'я:</label>
         <input type="text" id="firstName" th:field="*{firstName}" />
     </div>
     <div>
-        <label for="secondName">Second Name:</label>
+        <label for="secondName">Прізвище:</label>
         <input type="text" id="secondName" th:field="*{secondName}" />
     </div>
     <div>
-        <label for="password">Password:</label>
+        <label for="password">Пароль:</label>
         <input type="password" id="password" th:field="*{password}" />
     </div>
     <div>
-        <label for="tariffPlans">Tariff Plans:</label>
+        <label for="tariffPlans">Тарифний план:</label>
         <input type="text" id="tariffPlans" th:field="*{tariffPlans.id}" />
     </div>
     <div>
-        <button type="submit">Save</button>
+        <button type="submit">Зберегти</button>
     </div>
 </form>
 </body>
